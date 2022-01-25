@@ -1,0 +1,12 @@
+C:\ProyectosEF\UserService\UserServiceDataLayer\bin\Debug\UserServiceDataLayer.dll.config
+C:\ProyectosEF\UserService\UserServiceDataLayer\bin\Debug\UserServiceDataLayer.dll
+C:\ProyectosEF\UserService\UserServiceDataLayer\bin\Debug\UserServiceDataLayer.pdb
+C:\ProyectosEF\UserService\UserServiceDataLayer\bin\Debug\EntityFramework.dll
+C:\ProyectosEF\UserService\UserServiceDataLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\ProyectosEF\UserService\UserServiceDataLayer\bin\Debug\EntityFramework.xml
+C:\ProyectosEF\UserService\UserServiceDataLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\ProyectosEF\UserService\UserServiceDataLayer\obj\Debug\UserServiceDataLayer.csproj.AssemblyReference.cache
+C:\ProyectosEF\UserService\UserServiceDataLayer\obj\Debug\UserServiceDataLayer.csproj.CoreCompileInputs.cache
+C:\ProyectosEF\UserService\UserServiceDataLayer\obj\Debug\UserServiceDataLayer.csproj.CopyComplete
+C:\ProyectosEF\UserService\UserServiceDataLayer\obj\Debug\UserServiceDataLayer.dll
+C:\ProyectosEF\UserService\UserServiceDataLayer\obj\Debug\UserServiceDataLayer.pdb

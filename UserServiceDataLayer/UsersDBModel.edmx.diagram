@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c51c5f1270ca4edeb3689938108c4af2" Name="Diagram1">
+        <EntityTypeShape EntityType="AUTH_LAYER_CMSModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTH_LAYER_CMSModel.T_Component" Width="1.5" PointX="3.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTH_LAYER_CMSModel.T_Feature" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTH_LAYER_CMSModel.T_Login_Log" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTH_LAYER_CMSModel.T_Permission" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTH_LAYER_CMSModel.T_Rol" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTH_LAYER_CMSModel.T_Rol_Component_Feature" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTH_LAYER_CMSModel.T_Rol_Component_Permission" Width="1.5" PointX="6" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTH_LAYER_CMSModel.T_Transactional_Log" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTH_LAYER_CMSModel.T_User" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <AssociationConnector Association="AUTH_LAYER_CMSModel.FK_Feature_Component" ManuallyRouted="false" />
+        <AssociationConnector Association="AUTH_LAYER_CMSModel.FK_Rol_Component_Permission_Component" ManuallyRouted="false" />
+        <AssociationConnector Association="AUTH_LAYER_CMSModel.FK_Rol_Component_Feature_Feature" ManuallyRouted="false" />
+        <AssociationConnector Association="AUTH_LAYER_CMSModel.FK_Login_Log_User" ManuallyRouted="false" />
+        <AssociationConnector Association="AUTH_LAYER_CMSModel.FK_Rol_Component_Permission_Permission" ManuallyRouted="false" />
+        <AssociationConnector Association="AUTH_LAYER_CMSModel.FK_Rol_Component_Feature_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="AUTH_LAYER_CMSModel.FK_Rol_Component_Permission_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="AUTH_LAYER_CMSModel.FK_T_Rol_T_User" ManuallyRouted="false" />
+        <AssociationConnector Association="AUTH_LAYER_CMSModel.FK_Transactional_Log_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

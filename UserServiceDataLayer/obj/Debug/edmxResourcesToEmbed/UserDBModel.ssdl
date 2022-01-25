@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AUTH_LAYER_CMSEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="T_Component">
+    <Key>
+      <PropertyRef Name="IdComponent" />
+    </Key>
+    <Property Name="IdComponent" Type="smallint" Nullable="false" />
+    <Property Name="ComponentName" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="varchar" MaxLength="150" />
+    <Property Name="CreationDate" Type="date" />
+    <Property Name="CreatorUser" Type="bigint" />
+  </EntityType>
+  <EntityType Name="T_Feature">
+    <Key>
+      <PropertyRef Name="IdFeature" />
+    </Key>
+    <Property Name="IdFeature" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FeatureName" Type="varchar" MaxLength="50" />
+    <Property Name="IdComponent" Type="smallint" Nullable="false" />
+    <Property Name="CreationDate" Type="date" />
+    <Property Name="CreatorUser" Type="bigint" />
+  </EntityType>
+  <EntityType Name="T_Login_Log">
+    <Key>
+      <PropertyRef Name="IdLoginLog" />
+    </Key>
+    <Property Name="IdLoginLog" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdUser" Type="bigint" Nullable="false" />
+    <Property Name="LoginDate" Type="datetime" Nullable="false" />
+    <Property Name="Token" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_Permission">
+    <Key>
+      <PropertyRef Name="IdPermission" />
+    </Key>
+    <Property Name="IdPermission" Type="smallint" Nullable="false" />
+    <Property Name="PermissionName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="T_Rol">
+    <Key>
+      <PropertyRef Name="IdRol" />
+    </Key>
+    <Property Name="IdRol" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RolName" Type="varchar" MaxLength="50" />
+    <Property Name="CreationDate" Type="date" />
+    <Property Name="CreatorUser" Type="bigint" />
+  </EntityType>
+  <EntityType Name="T_Rol_Component_Feature">
+    <Key>
+      <PropertyRef Name="IdRol" />
+      <PropertyRef Name="IdFeature" />
+    </Key>
+    <Property Name="IdRol" Type="smallint" Nullable="false" />
+    <Property Name="IdFeature" Type="int" Nullable="false" />
+    <Property Name="CreatorUser" Type="bigint" />
+    <Property Name="CreationDate" Type="date" />
+  </EntityType>
+  <EntityType Name="T_Rol_Component_Permission">
+    <Key>
+      <PropertyRef Name="IdRol" />
+      <PropertyRef Name="IdComponent" />
+      <PropertyRef Name="IdPermission" />
+    </Key>
+    <Property Name="IdRol" Type="smallint" Nullable="false" />
+    <Property Name="IdComponent" Type="smallint" Nullable="false" />
+    <Property Name="IdPermission" Type="smallint" Nullable="false" />
+    <Property Name="CreatorUser" Type="bigint" />
+    <Property Name="CreationDate" Type="date" />
+  </EntityType>
+  <EntityType Name="T_Transactional_Log">
+    <Key>
+      <PropertyRef Name="IdTranLog" />
+    </Key>
+    <Property Name="IdTranLog" Type="bigint" Nullable="false" />
+    <Property Name="IdUser" Type="bigint" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="TableChange" Type="varchar" MaxLength="50" />
+    <Property Name="IdRegister" Type="int" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="T_User">
+    <Key>
+      <PropertyRef Name="IdUser" />
+    </Key>
+    <Property Name="IdUser" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="Fullname" Type="varchar" MaxLength="250" />
+    <Property Name="Address" Type="varchar" MaxLength="150" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="150" />
+    <Property Name="Age" Type="smallint" />
+    <Property Name="IdRol" Type="int" />
+  </EntityType>
+  <Association Name="FK_Feature_Component">
+    <End Role="T_Component" Type="Self.T_Component" Multiplicity="1" />
+    <End Role="T_Feature" Type="Self.T_Feature" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_Component">
+        <PropertyRef Name="IdComponent" />
+      </Principal>
+      <Dependent Role="T_Feature">
+        <PropertyRef Name="IdComponent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Login_Log_User">
+    <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+    <End Role="T_Login_Log" Type="Self.T_Login_Log" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_User">
+        <PropertyRef Name="IdUser" />
+      </Principal>
+      <Dependent Role="T_Login_Log">
+        <PropertyRef Name="IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rol_Component_Feature_Feature">
+    <End Role="T_Feature" Type="Self.T_Feature" Multiplicity="1" />
+    <End Role="T_Rol_Component_Feature" Type="Self.T_Rol_Component_Feature" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_Feature">
+        <PropertyRef Name="IdFeature" />
+      </Principal>
+      <Dependent Role="T_Rol_Component_Feature">
+        <PropertyRef Name="IdFeature" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rol_Component_Feature_Rol">
+    <End Role="T_Rol" Type="Self.T_Rol" Multiplicity="1" />
+    <End Role="T_Rol_Component_Feature" Type="Self.T_Rol_Component_Feature" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_Rol">
+        <PropertyRef Name="IdRol" />
+      </Principal>
+      <Dependent Role="T_Rol_Component_Feature">
+        <PropertyRef Name="IdRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rol_Component_Permission_Component">
+    <End Role="T_Component" Type="Self.T_Component" Multiplicity="1" />
+    <End Role="T_Rol_Component_Permission" Type="Self.T_Rol_Component_Permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_Component">
+        <PropertyRef Name="IdComponent" />
+      </Principal>
+      <Dependent Role="T_Rol_Component_Permission">
+        <PropertyRef Name="IdComponent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rol_Component_Permission_Permission">
+    <End Role="T_Permission" Type="Self.T_Permission" Multiplicity="1" />
+    <End Role="T_Rol_Component_Permission" Type="Self.T_Rol_Component_Permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_Permission">
+        <PropertyRef Name="IdPermission" />
+      </Principal>
+      <Dependent Role="T_Rol_Component_Permission">
+        <PropertyRef Name="IdPermission" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rol_Component_Permission_Rol">
+    <End Role="T_Rol" Type="Self.T_Rol" Multiplicity="1" />
+    <End Role="T_Rol_Component_Permission" Type="Self.T_Rol_Component_Permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_Rol">
+        <PropertyRef Name="IdRol" />
+      </Principal>
+      <Dependent Role="T_Rol_Component_Permission">
+        <PropertyRef Name="IdRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transactional_Log_User">
+    <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+    <End Role="T_Transactional_Log" Type="Self.T_Transactional_Log" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_User">
+        <PropertyRef Name="IdUser" />
+      </Principal>
+      <Dependent Role="T_Transactional_Log">
+        <PropertyRef Name="IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_Login_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserName" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+    <Parameter Name="Token" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="AUTH_LAYER_CMSEntitiesStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_Component" EntityType="Self.T_Component" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_Feature" EntityType="Self.T_Feature" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_Login_Log" EntityType="Self.T_Login_Log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_Permission" EntityType="Self.T_Permission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_Rol" EntityType="Self.T_Rol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_Rol_Component_Feature" EntityType="Self.T_Rol_Component_Feature" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_Rol_Component_Permission" EntityType="Self.T_Rol_Component_Permission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_Transactional_Log" EntityType="Self.T_Transactional_Log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_User" EntityType="Self.T_User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Feature_Component" Association="Self.FK_Feature_Component">
+      <End Role="T_Component" EntitySet="T_Component" />
+      <End Role="T_Feature" EntitySet="T_Feature" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Login_Log_User" Association="Self.FK_Login_Log_User">
+      <End Role="T_User" EntitySet="T_User" />
+      <End Role="T_Login_Log" EntitySet="T_Login_Log" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rol_Component_Feature_Feature" Association="Self.FK_Rol_Component_Feature_Feature">
+      <End Role="T_Feature" EntitySet="T_Feature" />
+      <End Role="T_Rol_Component_Feature" EntitySet="T_Rol_Component_Feature" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rol_Component_Feature_Rol" Association="Self.FK_Rol_Component_Feature_Rol">
+      <End Role="T_Rol" EntitySet="T_Rol" />
+      <End Role="T_Rol_Component_Feature" EntitySet="T_Rol_Component_Feature" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rol_Component_Permission_Component" Association="Self.FK_Rol_Component_Permission_Component">
+      <End Role="T_Component" EntitySet="T_Component" />
+      <End Role="T_Rol_Component_Permission" EntitySet="T_Rol_Component_Permission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rol_Component_Permission_Permission" Association="Self.FK_Rol_Component_Permission_Permission">
+      <End Role="T_Permission" EntitySet="T_Permission" />
+      <End Role="T_Rol_Component_Permission" EntitySet="T_Rol_Component_Permission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rol_Component_Permission_Rol" Association="Self.FK_Rol_Component_Permission_Rol">
+      <End Role="T_Rol" EntitySet="T_Rol" />
+      <End Role="T_Rol_Component_Permission" EntitySet="T_Rol_Component_Permission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transactional_Log_User" Association="Self.FK_Transactional_Log_User">
+      <End Role="T_User" EntitySet="T_User" />
+      <End Role="T_Transactional_Log" EntitySet="T_Transactional_Log" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
